@@ -17,7 +17,8 @@ class LocationDivision extends Model
         'location_id',
         'work_id',
         'detail_work',
-        'status',
+        'start_date',
+        'end_date',
     ];
 
     public function employee()

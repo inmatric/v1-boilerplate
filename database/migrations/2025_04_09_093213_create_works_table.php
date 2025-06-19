@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
-            $table->string('work_type', 255);
+            $table->string('task_type', 255);
             $table->string('task', 255);
             $table->text('work_detail');
             

@@ -17,7 +17,8 @@ class LocationDivisionSeeder extends Seeder
                 'location_id' => 1,
                 'work_id' => 1,
                 'detail_work' => 'Pemasangan AC di ruang meeting lantai 2',
-                'status' => 'in_progress',
+                'start_date' => '2025-06-01',
+                'end_date' => null, // masih berlangsung
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -28,7 +29,8 @@ class LocationDivisionSeeder extends Seeder
                 'location_id' => 2,
                 'work_id' => 2,
                 'detail_work' => 'Perbaikan jaringan internet di laboratorium komputer',
-                'status' => 'completed',
+                'start_date' => '2025-05-20',
+                'end_date' => '2025-05-22', // sudah selesai
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -39,7 +41,8 @@ class LocationDivisionSeeder extends Seeder
                 'location_id' => 3,
                 'work_id' => 3,
                 'detail_work' => 'Pembersihan dan pengecatan ulang dinding aula',
-                'status' => 'in_progress',
+                'start_date' => '2025-06-15',
+                'end_date' => null, // masih berlangsung
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

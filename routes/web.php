@@ -77,9 +77,9 @@ Route::middleware([AuthMiddleware::class])->group(function () {
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
-        Route::get('/petugas', 'indexPetugas')->name('index-petugas');
-        Route::put('/update-status/{id}', 'updateStatus')->name('update-status'); 
-    });
 
+        // Ini route untuk petugas (sudah benar)
+        Route::get('/petugas', 'indexPetugas')->name('index-petugas');
+    });
 });
 
