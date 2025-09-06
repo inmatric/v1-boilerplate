@@ -1,39 +1,49 @@
 @extends('components.layouts.main-layout')
 
-@section('title', 'Location Division')
+@section('title', 'Divisi Lokasi')
 
 @section('content')
     <div class="container mx-auto p-4">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Location Division</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Divisi Lokasi Saya</h2>
 
-        <!-- Data Location Division -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            @foreach ($data as $location)
-                <div class="bg-white shadow-md rounded-lg p-4">
-                    <h3 class="font-semibold text-lg text-gray-800">{{ $location->employee->name }}</h3>
-                    <p class="text-sm text-gray-600">Company: {{ $location->cooperation->company_name }}</p>
-                    <p class="text-sm text-gray-600">Location: {{ $location->location->location }}</p>
-                    <p class="text-sm text-gray-600">Work Type: {{ $location->work->work_type }}</p>
-                    <p class="text-sm text-gray-600">Work Detail: {{ $location->work_detail }}</p>
-
-                    <!-- Status Section -->
-                    <form action="{{ route('location-division.update-status', $location->id) }}" method="POST" class="mt-4">
-                        @csrf
-                        @method('PUT')
-                        <div class="flex flex-col">
-                            <label for="status" class="text-sm font-medium text-gray-700">Status</label>
-                            <select name="status" id="status" class="mt-1 p-2 border rounded-md">
-                                <option value="in_progress" {{ $location->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                                <option value="completed" {{ $location->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                            </select>
-                            <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md">Update Status</button>
-                        </div>
-                    </form>
-                </div>
-            @endforeach
+        <div class="overflow-x-auto rounded-lg shadow-lg border border-gray-200 mb-4">
+            <table class="table-auto w-full text-sm text-gray-700">
+                <thead class="bg-gray-200 text-gray-800 uppercase text-xs">
+                    <tr>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Perusahaan</th>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Lokasi</th>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Jenis Tugas</th>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Detail Pekerjaan</th>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Tanggal Mulai</th>
+                        <th class="px-4 py-3 font-bold whitespace-nowrap">Tanggal Selesai</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse ($data as $item)
+                        <tr class="odd:bg-white even:bg-gray-50 text-center hover:bg-gray-100">
+                            <td class="px-4 py-2 text-left">{{ $item->cooperation->company_name }}</td>
+                            <td class="px-4 py-2 text-left">{{ $item->location->location }}</td>
+                            <td class="px-4 py-2">{{ $item->work->task_type }}</td>
+                            <td class="px-4 py-2 text-left">{{ $item->detail_work }}</td>
+                            <td class="px-4 py-2 text-center">
+                                {{ \Carbon\Carbon::parse($item->start_date)->translatedFormat('d M Y') }}
+                            </td>
+                            <td class="px-4 py-2 text-center">
+                                {{ $item->end_date ? \Carbon\Carbon::parse($item->end_date)->translatedFormat('d M Y') : '-' }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-gray-500 text-sm">
+                                Tidak ada data divisi lokasi yang tersedia.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
 
-        <!-- Pagination Links -->
+        <!-- Pagination -->
         <div class="mt-4">
             {{ $data->links() }}
         </div>

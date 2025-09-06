@@ -7,6 +7,7 @@ use App\Models\Cooperation;
 use App\Models\Employee;
 use App\Models\Work;
 use App\Models\Location;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LocationDivisionController extends Controller
@@ -30,7 +31,7 @@ class LocationDivisionController extends Controller
                         $q->where('location', 'like', "%{$search}%");
                     })
                     ->orWhereHas('work', function ($q) use ($search) {
-                        $q->where('work_type', 'like', "%{$search}%");
+                        $q->where('task_type', 'like', "%{$search}%");
                     });
             })
             ->paginate(10);
@@ -63,10 +64,9 @@ class LocationDivisionController extends Controller
             'location_id' => 'required|exists:locations,id',
             'work_id' => 'required|exists:works,id',
             'detail_work' => 'nullable|string',
-            'status' => 'nullable|in:in_progress,completed',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-
-        $validated['status'] = $validated['status'] ?? 'in_progress';
 
         LocationDivision::create($validated);
 
@@ -108,9 +108,9 @@ class LocationDivisionController extends Controller
             'location_id' => 'required|exists:locations,id',
             'work_id' => 'required|exists:works,id',
             'detail_work' => 'nullable|string',
-            'status' => 'nullable|in:completed,in_progress',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-        $validated['status'] = $validated['status'] ?? 'in_progress';
 
         $locationDivision->update($validated);
 
@@ -132,24 +132,18 @@ class LocationDivisionController extends Controller
 
     public function indexPetugas()
     {
-        $data = LocationDivision::with(['employee', 'cooperation', 'location', 'work']) 
-            ->where('status', 'in_progress')
+        // Ambil ID pegawai dari user yang login
+        $employee = Auth::user()->employee;
+
+        if (!$employee) {
+            abort(403, 'Akses ditolak: Pegawai tidak ditemukan.');
+        }
+
+        $data = LocationDivision::with(['cooperation', 'location', 'work'])
+            ->where('employee_id', $employee->id)
+            ->orderBy('start_date', 'asc')
             ->paginate(10);
 
         return view('location-division.index-petugas', compact('data'));
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        $data = LocationDivision::findOrFail($id);
-
-        $validated = $request->validate([
-            'status' => 'required|in:in_progress,completed',
-        ]);
-
-        $data->status = $request->input('status');
-        $data->save();
-
-        return redirect()->route('location-division.index-petugas')->with('success', 'Status pekerjaan berhasil diperbarui.');
     }
 }

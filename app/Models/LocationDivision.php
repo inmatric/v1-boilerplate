@@ -16,8 +16,9 @@ class LocationDivision extends Model
         'cooperation_id',
         'location_id',
         'work_id',
-        'work_detail',
-        'status',
+        'detail_work',
+        'start_date',
+        'end_date',
     ];
 
     public function employee()
