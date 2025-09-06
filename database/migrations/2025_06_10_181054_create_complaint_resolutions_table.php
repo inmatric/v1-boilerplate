@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('doings', 255)->nullable();
             $table->string('photo_evidence', 255)->nullable();
             $table->unsignedBigInteger('location_id');
-      
-            $table->string('notes', 255)->nullable();
+
+            $table->string('notes',)->nullable();
+            $table->enum('status', ['pending', 'processed', 'resolved', 'rejected'])->default('pending');
             $table->timestamps();
-        
+
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->foreign('complaint_id')->references('id')->on('complaints')->onDelete('cascade');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');

@@ -32,7 +32,7 @@ class LoginController extends Controller
             //     return redirect()->intended('/hrd/dashboard');
             // }
 
-            return redirect()->intended('/users');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([
@@ -50,4 +50,9 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
-}
+
+   public function dashboard(Request $request)
+    {
+
+        return view('welcome');
+    }}

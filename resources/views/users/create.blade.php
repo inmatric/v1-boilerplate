@@ -13,9 +13,31 @@
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}"
-                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 @error('password') border-red-500 @enderror"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 @error('email') border-red-500 @enderror"
                     required>
                 @error('email')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Username --}}
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                <input type="text" name="username" value="{{ old('username') }}"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 @error('username') border-red-500 @enderror"
+                    required>
+                @error('username')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Address --}}
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900">Address</label>
+                <textarea name="address" rows="3"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 @error('address') border-red-500 @enderror"
+                    placeholder="Masukkan alamat (opsional)">{{ old('address') }}</textarea>
+                @error('address')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
@@ -35,7 +57,7 @@
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900">Role</label>
                 <select name="role_name"
-                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg w-full p-2.5 @error('role_name') border-red-500 @enderror"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg p-2.5 @error('role_name') border-red-500 @enderror"
                     required>
                     <option value="">Pilih role</option>
                     <option value="admin" {{ old('role_name') == 'admin' ? 'selected' : '' }}>Admin</option>

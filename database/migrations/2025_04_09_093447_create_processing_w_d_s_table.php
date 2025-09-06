@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('processing_w_d_s', function (Blueprint $table) {
-            // ID dan Relasi
+            // Primary Key
             $table->id();
+
+            // Foreign Keys
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
+            $table->foreignId('work_id')->constrained('works')->onDelete('cascade');
 
             // Timer Tracking
             $table->timestamp('start_time')->nullable();
@@ -32,12 +35,12 @@ return new class extends Migration
             // Timestamps
             $table->timestamps();
 
-            // Index untuk performa
+            // Indexes
             $table->index('employee_id');
+            $table->index('work_id');
             $table->index('status');
             $table->index(['start_time', 'end_time']);
         });
-
     }
 
     /**

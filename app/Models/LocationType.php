@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LocationType extends Model
 {
     // Nama tabel
-    protected $table = 'location_types';
+    protected $table = 'location_type';
 
     // Kolom yang bisa diisi
     protected $fillable = [

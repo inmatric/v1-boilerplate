@@ -18,9 +18,10 @@ return new class extends Migration {
             $table->foreignId('work_id')->constrained('works')->onDelete('cascade');
             $table->text('detail_work')->nullable();
             $table->enum('status', ['completed', 'in_progress'])->default('in_progress');
+            $table->index(['location_id', 'employee_id']);
+
             $table->timestamps();
         });
-
     }
 
     /**

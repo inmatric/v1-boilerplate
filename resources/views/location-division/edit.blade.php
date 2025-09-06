@@ -89,10 +89,10 @@
 
             <!-- Detail Pekerjaan -->
             <div class="mb-4">
-                <label for="work_detail" class="block text-sm font-medium text-gray-700">Work Detail</label>
-                <textarea name="work_detail" id="work_detail" rows="4"
-                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>{{ old('work_detail', $locationDivision->work_detail) }}</textarea>
-                @error('work_detail')
+                <label for="detail_work" class="block text-sm font-medium text-gray-700">Work Detail</label>
+                <textarea name="detail_work" id="detail_work" rows="4"
+                    class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>{{ old('"detail_work"', $locationDivision->detail_work) }}</textarea>
+                @error('detail_work')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
@@ -118,7 +118,7 @@
             <!-- Tombol Aksi -->
             <div class="flex justify-end mt-6">
                 <a href="{{ route('location-division.index') }}"
-                    class="mr-4 px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg">Cancel</a>
+                    class="mr-4 px-4 py-2 bg-gray-600 hover:bg-gray-400 rounded-lg text-white">Cancel</a>
                 <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Update</button>
             </div>
         </form>

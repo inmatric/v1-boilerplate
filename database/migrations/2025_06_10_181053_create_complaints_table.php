@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('complaints', function (Blueprint $table) {
@@ -18,21 +15,26 @@ return new class extends Migration
             $table->text('description');
             $table->string('proof_image', 255)->nullable();
             $table->enum('status', ['pending', 'processed', 'resolved', 'rejected'])->default('pending');
-            // Foreign key to complaint_resolutions table for status
-
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
-
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
 
-            $table->timestamps(); // This creates both created_at and updated_at
+            $table->timestamps();
+        });
+
+        Schema::table('complaints', function (Blueprint $table) {
+            $table->foreign(['location_id', 'employee_id'])
+                ->references(['location_id', 'employee_id'])
+                ->on('location_divisions')
+                ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
+        Schema::table('complaints', function (Blueprint $table) {
+            $table->dropForeign(['location_id', 'employee_id']);
+        });
+
         Schema::dropIfExists('complaints');
     }
 };

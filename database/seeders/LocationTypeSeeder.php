@@ -12,7 +12,7 @@ class LocationTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('location_types')->insert([
+        DB::table('location_type')->insert([
             [
                 'location_type' => 'Ruang Kelas',
                 'description' => 'Digunakan untuk kegiatan belajar mengajar',

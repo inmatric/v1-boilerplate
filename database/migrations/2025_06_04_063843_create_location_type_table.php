@@ -10,13 +10,12 @@ class CreateLocationTypeTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('location_types', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->string('location_type', 255);
-            $table->string('description', 255)->nullable();
-            $table->timestamps();
+        Schema::create('location_type', function (Blueprint $table) {
+            $table->id(); 
+            $table->string('location_type');
+            $table->text('description')->nullable(); 
+            $table->timestamps(); 
         });
-
     }
 
     /**

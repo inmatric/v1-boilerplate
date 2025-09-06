@@ -10,13 +10,16 @@
             @csrf
 
             <div class="mb-4">
-                <label for="company" class="block mb-2 text-sm font-medium text-gray-700">Nama Perusahaan</label>
-                <select id="company" name="company"
+                <label for="company_id" class="block mb-2 text-sm font-medium text-gray-700">Nama Perusahaan</label>
+                <select id="company_id" name="company_id"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     required>
                     <option value="">-- Pilih Perusahaan --</option>
                     @foreach($cooperations as $cooperation)
-                    <option value="{{ $cooperation->company_name }}">{{ $cooperation->company_name }}</option>
+                    <option value="{{ $cooperation->id }}"
+                        {{ old('company_id') == $cooperation->id ? 'selected' : '' }}>
+                        {{ $cooperation->company_name }}
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -39,6 +42,7 @@
                         <label class="text-sm text-gray-800">{{ $type->location_type }}</label>
                     </div>
                     @endforeach
+
                 </div>
             </div>
 
@@ -48,8 +52,9 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     required />
             </div>
+         
 
-            
+
 
             <button type="submit"
                 class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">

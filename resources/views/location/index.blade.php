@@ -70,7 +70,7 @@
                     <td class="px-6 py-4 text-center">{{ $location->information }}</td>
                     <td class="px-6 py-4 text-center space-x-2">
                         <a href="{{ route('location.edit', $location->id) }}"
-                            class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-300">
+                            class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 focus:ring-2 focus:outline-none focus:ring-yellow-300">
                             <i class="fas fa-edit mr-1"></i>Edit
                         </a>
                         <form action="{{ route('location.destroy', $location->id) }}" method="POST" class="inline">
@@ -154,7 +154,7 @@
                     <td class="px-6 py-4 text-center">{{ $type->description }}</td>
                     <td class="px-6 py-4 text-center space-x-2">
                         <a href="{{ route('location-type.edit', $type->id) }}"
-                            class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:ring-2 focus:outline-none focus:ring-blue-300">
+                            class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 focus:ring-2 focus:outline-none focus:ring-yellow-300">
                             <i class="fas fa-edit mr-1"></i>Edit
                         </a>
                         <form action="{{ route('location-type.destroy', $type->id) }}" method="POST" class="inline">

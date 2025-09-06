@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->id(); // Primary key
-            $table->unsignedBigInteger('cooperation_id');
-            $table->string('location', 255);
-            $table->string('location_type', 255);
-            $table->string('information', 255);
-            $table->string('status', 255);
+            $table->id();
+            $table->string('company');
+            $table->unsignedBigInteger('company_id');
+            $table->string('location');
+            $table->string('location_type');
+            $table->string('location_code');
+            $table->string('information');
+            $table->string('status');
             $table->timestamps();
+            $table->foreign('company_id')->references('id')->on('cooperations')->onDelete('cascade');
         });
-
     }
 
     /**

@@ -11,7 +11,11 @@ class AuthMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        // Logika autentikasi kamu di sini
+        // Cek apakah user sudah login
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        
         return $next($request);
     }
 }
